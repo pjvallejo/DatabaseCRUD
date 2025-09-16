@@ -1,0 +1,61 @@
+### Get all tasks
+GET http://localhost:3000/api/tasks
+Accept: application/json
+
+###
+
+### Get a single task by ID
+GET http://localhost:3000/api/tasks/1
+Accept: application/json
+
+###
+
+### Create a new task
+POST http://localhost:3000/api/tasks
+Content-Type: application/json
+
+{
+  "title": "Sample Task from request.http",
+  "description": "This is a test task created via request.http"
+}
+
+###
+
+### Update a task by ID
+PUT http://localhost:3000/api/tasks/1
+Content-Type: application/json
+
+{
+  "title": "Updated Task Title",
+  "description": "Updated description"
+}
+
+###
+
+### Mark a task as completed
+PATCH http://localhost:3000/api/tasks/1/complete
+Accept: application/json
+
+###
+
+### Mark a task as pending
+PATCH http://localhost:3000/api/tasks/1/pending
+Accept: application/json
+
+###
+
+### Delete a task by ID
+DELETE http://localhost:3000/api/tasks/1
+Accept: application/json
+
+###
+
+### Get task statistics
+GET http://localhost:3000/api/tasks/stats
+Accept: application/json
+
+###
+
+### Filter tasks (e.g., only pending, limit 5)
+GET http://localhost:3000/api/tasks?completed=false&limit=5
+Accept: application/json

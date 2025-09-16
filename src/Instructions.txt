@@ -1,0 +1,16 @@
+Create a script setup.sh to create a mysql container using docker-compose.
+The database image is located in https://github.com/docker-library/mysql
+Create a database script to create a MySql database whose names is IA_DB.
+Create a database script to create the TASK table on IA_DB database, this table has the following fields and its corresponding datatypes:
+1. id: int
+2. title: string
+3. description: string
+4. completed: boolean
+5. created_at: datetime
+6. updated_at: datetime
+
+Create a CRUD for Task table using Express.
+Create a module with basic database operations.
+Create a main script that use database module.
+Perform complete test
+Create a Readme.md version in spanish
