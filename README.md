@@ -1,127 +1,127 @@
-# API CRUD para Gestión de Tareas
+# Task Management CRUD API
 
-Una aplicación completa de gestión de tareas desarrollada con Express.js y MySQL, incluyendo operaciones CRUD completas y configuración con Docker.
+A complete task management application built with Express.js and MySQL, including full CRUD operations and Docker configuration.
 
-## 🚀 Características
+## 🚀 Features
 
-- ✅ API REST completa para gestión de tareas
-- 🐳 Configuración con Docker y Docker Compose
-- 🗄️ Base de datos MySQL con scripts de inicialización
-- 🔧 Operaciones CRUD completas (Crear, Leer, Actualizar, Eliminar)
-- ✨ Validación de datos con express-validator
-- 🧪 Suite de pruebas completa con Jest
-- 🔒 Middleware de seguridad con Helmet
-- 🌐 Configuración CORS
-- 📊 Endpoint de estadísticas de tareas
-- 💾 Pool de conexiones MySQL optimizado
+- ✅ Complete REST API for task management
+- 🐳 Docker and Docker Compose configuration
+- 🗄️ MySQL database with initialization scripts
+- 🔧 Complete CRUD operations (Create, Read, Update, Delete)
+- ✨ Data validation with express-validator
+- 🧪 Comprehensive test suite with Jest
+- 🔒 Security middleware with Helmet
+- 🌐 CORS configuration
+- 📊 Task statistics endpoint
+- 💾 Optimized MySQL connection pooling
 
-## 📋 Requisitos Previos
+## 📋 Prerequisites
 
-- **Node.js** (versión 16 o superior)
-- **Docker** y **Docker Compose**
-- **Git** (opcional, para clonar el repositorio)
+- **Node.js** (version 16 or higher)
+- **Docker** and **Docker Compose**
+- **Git** (optional, for cloning the repository)
 
-## 🛠️ Instalación y Configuración
+## 🛠️ Installation and Setup
 
-### 1. Clonar el Repositorio
+### 1. Clone the Repository
 ```bash
-git clone <url-del-repositorio>
+git clone <repository-url>
 cd DatabaseCRUD
 ```
 
-### 2. Instalar Dependencias de Node.js
+### 2. Install Node.js Dependencies
 ```bash
 npm install
 ```
 
-### 3. Configurar Variables de Entorno
-Copia el archivo de plantilla y configura las variables:
+### 3. Configure Environment Variables
+Copy the template file and configure the variables:
 ```bash
 cp config-template.env .env
 ```
 
-Edita el archivo `.env` con tu configuración:
+Edit the `.env` file with your configuration:
 ```env
-# Configuración de Base de Datos
+# Database Configuration
 DB_HOST=localhost
 DB_PORT=3306
 DB_NAME=IA_DB
 DB_USER=appuser
 DB_PASSWORD=apppassword
 
-# Configuración del Servidor
+# Server Configuration
 PORT=3000
 NODE_ENV=development
 
-# Seguridad
-JWT_SECRET=tu_clave_secreta_aqui_cambiar_en_produccion
+# Security
+JWT_SECRET=your_jwt_secret_here_change_in_production
 ```
 
-### 4. Inicializar la Base de Datos MySQL
-Ejecuta el script de configuración para crear el contenedor de MySQL:
+### 4. Initialize MySQL Database
+Run the setup script to create the MySQL container:
 ```bash
-# En sistemas Unix/Linux/macOS
+# On Unix/Linux/macOS
 bash setup.sh
 
-# En Windows (usando Git Bash o WSL)
+# On Windows (using Git Bash or WSL)
 bash setup.sh
 ```
 
-Este script:
-- 🐳 Inicia un contenedor MySQL usando Docker Compose
-- 📁 Crea los directorios necesarios
-- 🗄️ Configura la base de datos IA_DB
-- 📊 Crea la tabla TASK con datos de ejemplo
+This script:
+- 🐳 Starts a MySQL container using Docker Compose
+- 📁 Creates necessary directories
+- 🗄️ Sets up the IA_DB database
+- 📊 Creates the TASK table with sample data
 
-### 5. Iniciar el Servidor
+### 5. Start the Server
 ```bash
-# Modo desarrollo (con reinicio automático)
+# Development mode (with auto-restart)
 npm run dev
 
-# Modo producción
+# Production mode
 npm start
 ```
 
-El servidor estará disponible en: `http://localhost:3000`
+The server will be available at: `http://localhost:3000`
 
-## 📊 Estructura de la Base de Datos
+## 📊 Database Structure
 
-### Tabla TASK
-| Campo | Tipo | Descripción |
+### TASK Table
+| Field | Type | Description |
 |-------|------|-------------|
-| `id` | INT | Clave primaria, auto-incremental |
-| `title` | VARCHAR(255) | Título de la tarea (obligatorio) |
-| `description` | TEXT | Descripción detallada (opcional) |
-| `completed` | BOOLEAN | Estado de completado (por defecto: false) |
-| `created_at` | DATETIME | Fecha de creación (automática) |
-| `updated_at` | DATETIME | Fecha de última actualización (automática) |
+| `id` | INT | Primary key, auto-increment |
+| `title` | VARCHAR(255) | Task title (required) |
+| `description` | TEXT | Detailed description (optional) |
+| `completed` | BOOLEAN | Completion status (default: false) |
+| `created_at` | DATETIME | Creation date (automatic) |
+| `updated_at` | DATETIME | Last update date (automatic) |
 
-## 🔗 Endpoints de la API
+## 🔗 API Endpoints
 
-### 📋 Información General
-- **GET** `/` - Información de la API
-- **GET** `/health` - Estado de salud del servidor y base de datos
+### 📋 General Information
+- **GET** `/` - API information
+- **GET** `/health` - Server and database health status
 
-### 📝 Gestión de Tareas
+### 📝 Task Management
 
-#### Obtener Todas las Tareas
+#### Get All Tasks
 ```http
 GET /api/tasks
 ```
-**Parámetros de consulta opcionales:**
-- `completed`: `true`/`false` - Filtrar por estado
-- `limit`: número - Limitar resultados (1-100)
-- `offset`: número - Saltar resultados
+**Optional query parameters:**
+- `completed`: `true`/`false` - Filter by status
+- `limit`: number - Limit results (1-100)
+- `offset`: number - Skip results
 
-**Ejemplo de respuesta:**
+**Example response:**
 ```json
 {
   "success": true,
   "data": [
     {
       "id": 1,
-      "title": "Configurar Base de Datos MySQL",
-      "description": "Configurar contenedor MySQL con Docker Compose",
+      "title": "Setup MySQL Database",
+      "description": "Configure MySQL container with Docker Compose",
       "completed": true,
       "created_at": "2024-01-01T10:00:00.000Z",
       "updated_at": "2024-01-01T10:30:00.000Z"
@@ -136,56 +136,56 @@ GET /api/tasks
 }
 ```
 
-#### Obtener Tarea Específica
+#### Get Specific Task
 ```http
 GET /api/tasks/:id
 ```
 
-#### Crear Nueva Tarea
+#### Create New Task
 ```http
 POST /api/tasks
 Content-Type: application/json
 
 {
-  "title": "Nueva Tarea",
-  "description": "Descripción de la tarea",
+  "title": "New Task",
+  "description": "Task description",
   "completed": false
 }
 ```
 
-#### Actualizar Tarea
+#### Update Task
 ```http
 PUT /api/tasks/:id
 Content-Type: application/json
 
 {
-  "title": "Tarea Actualizada",
-  "description": "Nueva descripción",
+  "title": "Updated Task",
+  "description": "New description",
   "completed": true
 }
 ```
 
-#### Marcar como Completada
+#### Mark as Completed
 ```http
 PATCH /api/tasks/:id/complete
 ```
 
-#### Marcar como Pendiente
+#### Mark as Pending
 ```http
 PATCH /api/tasks/:id/pending
 ```
 
-#### Eliminar Tarea
+#### Delete Task
 ```http
 DELETE /api/tasks/:id
 ```
 
-#### Obtener Estadísticas
+#### Get Statistics
 ```http
 GET /api/tasks/stats
 ```
 
-**Respuesta:**
+**Response:**
 ```json
 {
   "success": true,
@@ -198,25 +198,25 @@ GET /api/tasks/stats
 }
 ```
 
-## 🧪 Ejecutar Pruebas
+## 🧪 Running Tests
 
-### Ejecutar Todas las Pruebas
+### Run All Tests
 ```bash
 npm test
 ```
 
-### Ejecutar Pruebas en Modo de Observación
+### Run Tests in Watch Mode
 ```bash
 npm run test:watch
 ```
 
-### Cobertura de Código
+### Code Coverage
 ```bash
 npm test
 ```
-Los reportes de cobertura se generarán en la carpeta `coverage/`.
+Coverage reports will be generated in the `coverage/` folder.
 
-## 📁 Estructura del Proyecto
+## 📁 Project Structure
 
 ```
 DatabaseCRUD/
@@ -240,98 +240,103 @@ DatabaseCRUD/
 ├── setup.sh
 ├── package.json
 ├── jest.config.js
-├── .env.example
+├── config-template.env
 └── README.md
 ```
 
-## 🐳 Comandos de Docker
+## 🐳 Docker Commands
 
-### Iniciar Servicios
+### Start Services
 ```bash
 docker-compose up -d
 ```
 
-### Detener Servicios
+### Stop Services
 ```bash
 docker-compose down
 ```
 
-### Ver Logs
+### View Logs
 ```bash
 docker-compose logs mysql
 ```
 
-### Conectar a la Base de Datos
+### Connect to Database
 ```bash
 docker exec -it mysql_ia_db mysql -u appuser -p IA_DB
 ```
 
-## 🔧 Scripts NPM Disponibles
+## 🔧 Available NPM Scripts
 
-| Script | Comando | Descripción |
+| Script | Command | Description |
 |--------|---------|-------------|
-| `start` | `npm start` | Inicia el servidor en modo producción |
-| `dev` | `npm run dev` | Inicia el servidor en modo desarrollo |
-| `test` | `npm test` | Ejecuta todas las pruebas |
-| `test:watch` | `npm run test:watch` | Ejecuta pruebas en modo observación |
-| `setup` | `npm run setup` | Ejecuta el script de configuración |
+| `start` | `npm start` | Start server in production mode |
+| `dev` | `npm run dev` | Start server in development mode |
+| `test` | `npm test` | Run all tests |
+| `test:watch` | `npm run test:watch` | Run tests in watch mode |
+| `setup` | `npm run setup` | Run setup script |
 
-## 🔒 Seguridad
+## 🔒 Security
 
-La aplicación incluye las siguientes medidas de seguridad:
-- **Helmet.js**: Protección de headers HTTP
-- **CORS**: Control de acceso entre orígenes
-- **Validación de entrada**: Con express-validator
-- **Variables de entorno**: Para configuración sensible
-- **Pool de conexiones**: Gestión segura de conexiones a BD
+The application includes the following security measures:
+- **Helmet.js**: HTTP header protection
+- **CORS**: Cross-origin access control
+- **Input validation**: With express-validator
+- **Environment variables**: For sensitive configuration
+- **Connection pooling**: Secure database connection management
 
-## 🐛 Solución de Problemas
+## 🐛 Troubleshooting
 
 ### Error: "Database connection failed"
-1. Verifica que Docker esté ejecutándose
-2. Ejecuta `docker-compose up -d` para iniciar MySQL
-3. Espera 30 segundos para que MySQL se inicialice completamente
-4. Verifica la configuración en `.env`
+1. Verify Docker is running
+2. Run `docker-compose up -d` to start MySQL
+3. Wait 30 seconds for MySQL to fully initialize
+4. Check configuration in `.env`
 
 ### Error: "Port already in use"
-1. Cambia el puerto en `.env` (ejemplo: `PORT=3001`)
-2. O detén el proceso que usa el puerto 3000
+1. Change port in `.env` (example: `PORT=3001`)
+2. Or stop the process using port 3000
 
-### Error en las pruebas
-1. Asegúrate de que la base de datos esté ejecutándose
-2. Verifica que no haya otras instancias del servidor ejecutándose
-3. Ejecuta `npm test` de nuevo
+### Test Errors
+1. Ensure database is running
+2. Verify no other server instances are running
+3. Run `npm test` again
 
-## 📚 Tecnologías Utilizadas
+## 📚 Technologies Used
 
 - **Backend**: Node.js, Express.js
-- **Base de Datos**: MySQL 8.0
-- **ORM/Conexión**: mysql2
-- **Pruebas**: Jest, Supertest
-- **Contenedores**: Docker, Docker Compose
-- **Validación**: express-validator
-- **Seguridad**: Helmet.js, CORS
-- **Variables de Entorno**: dotenv
+- **Database**: MySQL 8.0
+- **Database Connection**: mysql2
+- **Testing**: Jest, Supertest
+- **Containers**: Docker, Docker Compose
+- **Validation**: express-validator
+- **Security**: Helmet.js, CORS
+- **Environment Variables**: dotenv
 
-## 🤝 Contribución
+## 🤝 Contributing
 
-1. Fork el proyecto
-2. Crea tu rama de características (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## 📄 Licencia
+## 📄 License
 
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+This project is licensed under the MIT License. See the `LICENSE` file for more details.
 
-## 📞 Soporte
+## 📞 Support
 
-Si tienes problemas o preguntas:
-1. Revisa la sección de solución de problemas
-2. Abre un issue en el repositorio
-3. Consulta la documentación de las tecnologías utilizadas
+If you have problems or questions:
+1. Check the troubleshooting section
+2. Open an issue in the repository
+3. Consult the documentation for the technologies used
 
 ---
 
-⭐ ¡Si este proyecto te fue útil, considera darle una estrella en GitHub!
+⭐ If this project was useful to you, consider giving it a star on GitHub!
+
+## 📖 README Versions
+
+- **English**: [README.md](./README.md) (this file)
+- **Español**: [README.es.md](./README.es.md)
